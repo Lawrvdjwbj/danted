@@ -1,8 +1,6 @@
 #!/bin/bash
 #
 #   Dante Socks5 Server AutoInstall
-#   -- Owner:       https://www.inet.no/dante
-#   -- Provider:    https://sockd.info
 #   -- Author:      Lawrvdjwbj
 #
 
