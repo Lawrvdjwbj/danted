@@ -1,79 +1,3 @@
-# Sockd
-
-基于 [Dante socks5 (1.3.2/1.4.2)](https://www.inet.no/dante) 的自动化部署镜像/脚本.
-
-## Docker 安装模式
-
-### 优势
-
-+ 基于 Alpine, 精简镜像.
-+ 支持 `Pam.user` 认证, 不与系统用户关联
-+ 支持 一行命令启动
-
-
-### 安装使用说明
-
-#### 1. 使用 docker run
-
-```bash
-# sockd.passwd 是密码文件 
-docker run -d \
-    --name sockd \
-    --publish 2020:2020 \
-    --volume sockd.passwd:/home/danted/conf/sockd.passwd \
-    lozyme/sockd
-```
-
-#### 2. 使用 docker-compose.yaml (定义用户密码文件路径 `CONFIGFILE`)
-
-```yaml
-version: '3'
-
-services:
-
-  sockd:
-    image: lozyme/sockd
-    container_name: sockd
-    restart: always
-    ports:
-      - 2020:2020
-    volumes:
-      - CONFIGFILE:/home/danted/conf/sockd.passwd
-```
-
-#### 3. 启动
-
-```bash
-docker-compose up -d
-```
-
-#### 4. 检查端口
-
-```bash
-ss -lnp | grep 2020
-```
-
-#### 5. 添加用户
-
-```bash
-docker exec sockd script/pam add USER PASSWORD
-```
-
-#### 6. 查看用户
-
-```bash
-docker exec sockd script/pam show
-```
-
-#### 7. 验证 (外部访问需修改 127.0.0.1)
-
-```bash
-curl https://ifconfig.co --socks5 127.0.0.1:2020 --proxy-user sockd:sockd
-```
-
-
-## 自动安装脚本
-
 ### 安装选项
 
 | 选项 | 描述 |
@@ -100,10 +24,6 @@ curl https://ifconfig.co --socks5 127.0.0.1:2020 --proxy-user sockd:sockd
 
 + 测试64位系统 centos 会出现认证失败 请添加一条命令 `cp /lib/security/pam_pwdfile.so /lib64/security/`
 
-
-### 未解决问题
-
-+ 1. 分析log对连接sock5的用户进行统计。
 
 ### 安装说明
 
