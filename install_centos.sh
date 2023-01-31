@@ -184,7 +184,7 @@ download_file(){
     local path="$1"
     local filename="$2"
     local execute="$3"
-
+    yum -y install wget
     [ -z "${filename}" ] && filename="$path"
 
     [ -n "$path" ] && \
