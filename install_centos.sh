@@ -373,7 +373,7 @@ ${CCYAN}+_________________________________________+$CEND
 EOF
     echo -e "\033[32m Dante Server Install Successfuly! \033[0m"
 else
-    echo -e "\033[1;31m Dante Server Install Failed! \033[0m"
+    echo -e "/etc/init.d/socks status \033[0m"
 fi
 
 echo ""
